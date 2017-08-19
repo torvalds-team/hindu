@@ -9,26 +9,14 @@
       <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
     </ul>
-    <h2>Ecosystem</h2>
+    <h2 @click="roteia">Ecosystem</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
       <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
-
-    <b-dropdown id="ddown1" text="Dropdown Button sm" class="m-md-2">
-      <b-dropdown-header>This is a heading</b-dropdown-header>
-      <b-dropdown-item>Action</b-dropdown-item>
-      <b-dropdown-item>Another action</b-dropdown-item>
-      <b-dropdown-divider></b-dropdown-divider>
-      <b-dropdown-item>Something else here...</b-dropdown-item>
-      <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-    </b-dropdown>
   </div>
-
-  
-
 </template>
 
 <script>
@@ -38,7 +26,15 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js PWA'
     }
+  },
+
+  methods: {
+    roteia () {
+      this.$router.push('/events')
+    }
   }
+
+
 }
 </script>
 
