@@ -12,7 +12,7 @@
 
       <div v-show="displayProduct">
         <div class="row-filter">
-          <b-button variant="success" @click="addToCart(productId)">Comprar!</b-button>
+          <b-button variant="success" @click="cardPage(productId)">Comprar!</b-button>
         </div>
       </div>
     </div>
