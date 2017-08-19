@@ -20,9 +20,6 @@ export default {
     }
   },
   methods: {
-    setEvent (eventId) {
-      this.eventId = eventId
-    },
     goHome () {
       this.$router.push('/')
     },
@@ -36,6 +33,10 @@ export default {
     this.$on('setUid', (userId) => {
       localStorage.setItem('userId', userId)
       this.userId = localStorage.getItem('userId')
+    })
+    this.$on('setEvent', (eventKey) => {
+      localStorage.setItem('eventKey', eventKey)
+      this.userId = localStorage.getItem('eventKey')
     })
   }
 }
@@ -84,5 +85,4 @@ header span {
 .row-filter {
   margin-top: 20px;
 }
-
 </style>

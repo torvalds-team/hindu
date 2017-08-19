@@ -48,7 +48,7 @@ export default {
       this.provider.addScope('user_birthday')
       firebase.auth().signInWithPopup(this.provider).then((result) => {
         var token = result.credential.accessToken
-        console.log(this.$parent.$emit('setUid', result.user.uid))
+        this.$parent.$emit('setUid', result.user.uid)
         this.$router.push('/capture')
       }).catch((error) => {
         // Handle Errors here.
