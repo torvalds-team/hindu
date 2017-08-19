@@ -18,7 +18,7 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/events/:eventName',
+      path: '/events/:eventKey',
       name: 'Eventos',
       component: Events,
       props: true
