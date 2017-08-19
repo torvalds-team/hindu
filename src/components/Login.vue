@@ -37,7 +37,7 @@ export default {
     authenticate () {
       var auth = firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then((obj) => {
-          this.$emit('setUid', obj.uid)
+          this.$parent.$emit('setUid', obj.uid)
           this.$router.push('/capture')
         })
         .catch(function (error) {
