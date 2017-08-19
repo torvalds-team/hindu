@@ -33,6 +33,8 @@
 
 <script>
 import firebase from '../firebase/firebase.js'
+import QrCode from 'qrcode-reader'
+const qr = new QrCode();
 
 export default {
   name: 'capture',
@@ -87,12 +89,26 @@ export default {
 
       img.src = canvas.toDataURL('image/png');
       this.qrCode = img.src
+
+      if (this.qrCode) {
+        console.log(qr.decode(this.qrCode))
+      }
       // document.body.appendChild(img);
     }
 
   },
 
   mounted () {
+
+    qr.callback = (error, result) => {
+      if (error) {
+        console.log('Error during QR decode: ', error)
+        return;
+      } else {
+        this.product_id = result.result
+        this.productDetail()
+      }
+    }
 
     var videoElement = document.querySelector('video');
     var videoSelect = document.querySelector('select#videoSource');
@@ -112,7 +128,7 @@ export default {
             (videoSelect.length + 1);
           videoSelect.appendChild(option);
         } else {
-          console.log('Found ome other kind of source/device: ', deviceInfo);
+          // console.log('Found ome other kind of source/device: ', deviceInfo);
         }
       }
     }
