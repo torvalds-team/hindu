@@ -19,7 +19,8 @@
     "mongoose": "^4.11.7",
     "vue": "^2.4.2",
     "vue-router": "^2.3.1",
-    "vuefire": "^1.4.3"
+    "vuefire": "^1.4.3",
+    "webcamjs": "^1.0.22"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
