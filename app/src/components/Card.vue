@@ -13,12 +13,12 @@
                   placeholder="CVV"
     ></b-form-input>
     <div class="col-md-12">
-      <b-button size="lg" variant="primary">
+      <b-button @click.native="checkout()" size="lg" variant="primary">
         Comprar
       </b-button>
     </div>
     <div class="col-md-12">
-      <b-button size="sm" variant="secondary">
+      <b-button @click.native="checkout()" size="sm" variant="secondary">
         Pagar com dinheiro
       </b-button>
     </div>
@@ -33,7 +33,13 @@ export default {
     return {}
   },
 
-  methods: {}
+  methods: {
+    checkout () {
+      setTimeout(() => {
+        this.$router.push('/success')
+      }, 300)
+    }
+  }
 }
 </script>
 
