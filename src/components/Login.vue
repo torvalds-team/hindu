@@ -48,9 +48,8 @@ export default {
       this.provider.addScope('user_birthday')
       firebase.auth().signInWithPopup(this.provider).then((result) => {
         var token = result.credential.accessToken
-        var user = result.user
-        console.log(token)
-        // ...
+        this.$parent.$emit('setUid', result.user.uid)
+        this.$router.push('/capture')
       }).catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
@@ -59,7 +58,6 @@ export default {
         this.email = error.email
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential
-        console.log(credential)
       })
     }
   },
