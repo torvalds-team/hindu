@@ -32,11 +32,14 @@ export default {
   methods: {
     authenticate () {
       var auth = firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then((obj) => {
+        this.$emit('setUid', obj.uid)
+        this.$router.push('/capture')
+      })
       .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        alert(error.message)
       });
-      console.log(auth)
+
     }
   }
 }

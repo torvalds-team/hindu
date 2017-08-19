@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>
+    <header v-on:setUid="setUser">
       <span>Vue.js PWA</span>
     </header>
     <main>
@@ -11,7 +11,17 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      userId: ''
+    }
+  },
+  methods: {
+    setUser (uid) {
+      this.userId = uid
+    }
+  }
 }
 </script>
 
