@@ -18,12 +18,21 @@
     <b-button @click.native="takePhoto">
       Ler QR Code
     </b-button>
+
+    <div class="row">
+
+      <div class="select">
+        <label for="videoSource">Video source: </label>
+        <select id="videoSource"></select>
+      </div>
+
+      <video muted autoplay></video>
+    </div>
   </div>
 </template>
 
 <script>
 import firebase from '../firebase/firebase.js'
-import Webcam from 'webcamjs'
 
 export default {
   name: 'capture',
@@ -56,26 +65,83 @@ export default {
           alert(error.message)
         });
     },
+
     productDetail () {
       setTimeout(() => {
         this.$router.push('/product/' + this.product_id)
       }, 300)
     },
+
     takePhoto () {
-      console.log('asdhasudhasuhd')
-      Webcam.snap((data_uri) => {
-        this.qrCode = data_uri
-      })
+      var img = document.querySelector('img') || document.createElement('img');
+      var context;
+      var width = document.querySelector('video').offsetWidth
+      var height = document.querySelector('video').offsetHeight;
+
+      var canvas = canvas || document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      context = canvas.getContext('2d');
+      context.drawImage(document.querySelector('video'), 0, 0, width, height);
+
+      img.src = canvas.toDataURL('image/png');
+      this.qrCode = img.src
+      // document.body.appendChild(img);
     }
+
   },
 
   mounted () {
-    Webcam.set({
-      width: 320,
-      height: 240,
-      image_format: 'jpeg'
-    });
-    Webcam.attach('#my_camera')
+
+    var videoElement = document.querySelector('video');
+    var videoSelect = document.querySelector('select#videoSource');
+
+    navigator.mediaDevices.enumerateDevices()
+      .then(gotDevices).then(getStream).catch(handleError);
+
+    videoSelect.onchange = getStream;
+
+    function gotDevices (deviceInfos) {
+      for (var i = 0; i !== deviceInfos.length; ++i) {
+        var deviceInfo = deviceInfos[i];
+        var option = document.createElement('option');
+        option.value = deviceInfo.deviceId;
+        if (deviceInfo.kind === 'videoinput') {
+          option.text = deviceInfo.label || 'camera ' +
+            (videoSelect.length + 1);
+          videoSelect.appendChild(option);
+        } else {
+          console.log('Found ome other kind of source/device: ', deviceInfo);
+        }
+      }
+    }
+
+    function getStream () {
+      if (window.stream) {
+        window.stream.getTracks().forEach(function (track) {
+          track.stop();
+        });
+      }
+      var constraints = {
+        video: {
+          optional: [{
+            sourceId: videoSelect.value
+          }]
+        }
+      };
+      navigator.mediaDevices.getUserMedia(constraints).
+        then(gotStream).catch(handleError);
+    }
+
+    function gotStream (stream) {
+      window.stream = stream; // make stream available to console
+      videoElement.srcObject = stream;
+    }
+
+    function handleError (error) {
+      console.log('Error: ', error);
+    }
   }
 }
 </script>
