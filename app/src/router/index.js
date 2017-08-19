@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Events from '@/components/Events'
 import Capture from '@/components/Capture'
+import Card from '@/components/Card'
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ export default new Router({
       path: '/capture',
       name: 'Capture',
       component: Capture,
+      props: true
+    }, {
+      path: '/card',
+      name: 'Card',
+      component: Card,
       props: true
     }
   ]
