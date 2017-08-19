@@ -46,7 +46,7 @@ export default {
     },
     productDetail () {
       setTimeout(() => {
-        this.$router.push('/product/123')
+        this.$router.push('/product/'+this.product_id)
       }, 300)
     }
   }

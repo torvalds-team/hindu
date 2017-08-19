@@ -1,16 +1,19 @@
 <template>
   <div class="row">
     <div class="col-md-12 row-filter">
-      <h1>{{ name }} : {{ productId }}</h1>
-      <h3>{{ description }}</h3>
-      <h4> R$ {{ price }}</h4>
+      <div v-show="displayProduct">
+        <h1>{{ name }} : {{ productId }}</h1>
+        <h4> R$ {{ price }}</h4>
+      </div>
 
       <div class="row-filter">
         <img :src="image" class="col-6 col-offset-4" alt="">
       </div>
 
-      <div class="row-filter">
-        <b-button variant="success" @click="addToCart(productId)">Comprar!</b-button>
+      <div v-show="displayProduct">
+        <div class="row-filter">
+          <b-button variant="success" @click="addToCart(productId)">Comprar!</b-button>
+        </div>
       </div>
     </div>
   </div>
@@ -23,25 +26,43 @@ export default {
   name: 'events',
   data () {
     return {
-      name: 'Camiseta Torvalds',
-      price: '109',
-      image: require('../assets/camiseta.png'),
-      description: 'Uma camiseta louca...',
+      displayProduct: false,
+      name: '',
+      price: '',
+      image: require('../assets/loading.gif'),
       eventsRef: firebase.database().ref('events')
     }
   },
   props: ['productId'],
   methods: {
-    addToCart (productId) {
-      this.$router.push('/card/' + productId)
-      // add to cart routine
+    cardPage () {
+      this.$router.push('/card/' + this.productId)
     }
+
   },
   mounted () {
-    // cria registro no /events
-    console.log(this.eventsRef.push({
-      text: 'hello'
-    }))
+    var ref = firebase.database().ref('events')
+    ref.once('value')
+      .then(snapshot => {
+        const product = snapshot
+          .child('-KrtItSWwIXHQpQ6CRbB')
+          .child('products')
+          .child(this.productId)
+          .val()
+
+        if(!product) {
+          throw new Error('Produto não existente')
+        }
+
+        this.displayProduct = true
+        this.name = product.name
+        this.price = Math.floor(product.price / 100)
+        this.image = product.image_url
+      })
+      .catch(function(error) {
+        alert(error.message)
+        this.$router.push('/capture')
+      });
   }
 }
 </script>
