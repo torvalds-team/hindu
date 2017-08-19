@@ -4,7 +4,7 @@
     <b-form-input type="text"
                   placeholder="Código do produto"
     ></b-form-input>
-    <b-button>
+    <b-button @click.native="productDetail()">
       Capturar
     </b-button>
   </div>
@@ -18,7 +18,13 @@ export default {
     return {}
   },
 
-  methods: {}
+  methods: {
+    productDetail () {
+      setTimeout(() => {
+        this.$router.push('/product/123')
+      }, 300)
+    }
+  }
 }
 </script>
 
