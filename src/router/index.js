@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Events from '@/components/Events'
 import Capture from '@/components/Capture'
 import Login from '@/components/Login'
 import Product from '@/components/Product'
@@ -16,12 +15,6 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
-    },
-    {
-      path: '/events/:eventKey',
-      name: 'Eventos',
-      component: Events,
-      props: true
     }, {
       path: '/capture',
       name: 'Capture',

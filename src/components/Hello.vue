@@ -33,7 +33,8 @@ export default {
   methods: {
     toEvents (eventItem) {
       setTimeout(() => {
-        this.$router.push('/events/' + eventItem.key)
+        this.$emit('setEvent', eventItem.key)
+        this.$router.push('/login')
       }, 300)
     },
   },
