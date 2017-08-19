@@ -18,8 +18,11 @@ export default {
     }
   },
   methods: {
-    setUser (uid) {
-      this.userId = uid
+    setUser (uId) {
+      this.userId = uId
+    },
+    setEvent (eventId) {
+      this.eventId = eventId
     },
     goHome () {
       this.$router.push('/')
