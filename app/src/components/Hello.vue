@@ -16,7 +16,19 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+
+    <b-dropdown id="ddown1" text="Dropdown Button sm" class="m-md-2">
+      <b-dropdown-header>This is a heading</b-dropdown-header>
+      <b-dropdown-item>Action</b-dropdown-item>
+      <b-dropdown-item>Another action</b-dropdown-item>
+      <b-dropdown-divider></b-dropdown-divider>
+      <b-dropdown-item>Something else here...</b-dropdown-item>
+      <b-dropdown-item disabled>Disabled action</b-dropdown-item>
+    </b-dropdown>
   </div>
+
+  
+
 </template>
 
 <script>
