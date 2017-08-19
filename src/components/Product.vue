@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import db from '../database/firebaseDatabase.js'
+import firebase from '../firebase/firebase.js'
 
 export default {
   name: 'events',
@@ -27,7 +27,7 @@ export default {
       price: '109',
       image: require('../assets/camiseta.png'),
       description: 'Uma camiseta louca...',
-      eventsRef: db.ref('events')
+      eventsRef: firebase.database().ref('events')
     }
   },
   props: ['productId'],

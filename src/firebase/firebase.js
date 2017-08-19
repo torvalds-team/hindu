@@ -9,6 +9,6 @@ var db = firebase.initializeApp({
   projectId: "hackathon-1bec8",
   storageBucket: "hackathon-1bec8.appspot.com",
   messagingSenderId: "335611432326"
-}).database()
+})
 
-export default db
+export default firebase
