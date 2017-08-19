@@ -20,6 +20,9 @@ export default {
     }
   },
   methods: {
+    setEvent (eventId) {
+      this.eventId = eventId
+    },
     goHome () {
       this.$router.push('/')
     },
@@ -81,4 +84,5 @@ header span {
 .row-filter {
   margin-top: 20px;
 }
+
 </style>
