@@ -24,7 +24,6 @@ export default {
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js PWA',
       eventsRef: firebase.database().ref('events'),
       eventsArray: []
     }
