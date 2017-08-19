@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import db from '../database/firebaseDatabase.js'
+
 export default {
   name: 'events',
   data () {
@@ -24,7 +26,8 @@ export default {
       name: 'Camiseta Torvalds',
       price: '109',
       image: require('../assets/camiseta.png'),
-      description: 'Uma camiseta louca...'
+      description: 'Uma camiseta louca...',
+      eventsRef: db.ref('events')
     }
   },
   props: ['productId'],
@@ -33,6 +36,12 @@ export default {
       this.$router.push('/card/' + productId)
       // add to cart routine
     }
+  },
+  mounted () {
+    // cria registro no /events
+    console.log(this.eventsRef.push({
+      text: 'hello'
+    }))
   }
 }
 </script>
