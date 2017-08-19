@@ -4,7 +4,12 @@
       <hr>
       <h1> Eventos </h1>
       <hr>
-      <b-list-group-item v-for="eventItem in eventsArray" :key="eventItem.key" @click.native="toEvents(eventItem)"> {{ eventItem.name }}</b-list-group-item>
+      <b-list-group-item v-for="eventItem in eventsArray" :key="eventItem.key" @click.native="toEvents(eventItem)">
+        <div class="col-12">
+          {{ eventItem.name }}
+          <b-badge class="" pill variant="success">{{ eventItem.distance }} Km</b-badge>
+        </div>
+      </b-list-group-item>
     </b-list-group>
   </div>
 </template>
