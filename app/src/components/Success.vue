@@ -1,18 +1,12 @@
 <template>
   <div class="container">
-  <h5>Insira o código do produto</h5>
-    <b-form-input type="text"
-                  placeholder="Código do produto"
-    ></b-form-input>
-    <b-button>
-      Capturar
-    </b-button>
+    <h3>Sua compra foi realizada com sucesso, utilize o código <strong>XTPO</strong> para retirar seu pedido</h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'capture',
+  name: 'sucess',
 
   data () {
     return {}
