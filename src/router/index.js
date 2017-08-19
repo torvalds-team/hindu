@@ -9,12 +9,13 @@ import Success from '@/components/Success'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'Hello',
-      component: Hello
+      component: Hello,
+      meta: { anonymous: true },
     }, {
       path: '/capture',
       name: 'Capture',
@@ -39,7 +40,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
-      props: true
+      props: true,
+      meta: { anonymous: true },
     }
   ]
 })
+
+export default router

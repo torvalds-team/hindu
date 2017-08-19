@@ -12,6 +12,16 @@ Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
 
+router.beforeEach((to, from, next) => {
+  const userId = App.data().userId
+
+  if (userId || to.meta.anonymous) {
+    next()
+  } else {
+    next({ name: 'Login' })
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
