@@ -20,6 +20,7 @@
     "http-server": "^0.10.0",
     "mongoose": "^4.11.7",
     "path": "^0.12.7",
+    "qrcode-reader": "^1.0.2",
     "serve-static": "^1.12.4",
     "vue": "^2.4.2",
     "vue-router": "^2.3.1",
