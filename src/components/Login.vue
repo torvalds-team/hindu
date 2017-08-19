@@ -39,7 +39,6 @@ export default {
       .catch(function(error) {
         alert(error.message)
       });
-
     }
   }
 }
