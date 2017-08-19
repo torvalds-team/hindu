@@ -1,24 +1,19 @@
 <template>
   <div class="container">
-    <h5>Número do cartão</h5>
-    <b-form-input type="text"
-                  placeholder="0000-0000-0000-0000"
-    ></b-form-input>
-    <h5>Validade</h5>
-    <b-form-input type="text"
-                  placeholder="00/00"
-    ></b-form-input>
-    <h5>Codigo de segurança</h5>
-    <b-form-input type="text"
-                  placeholder="CVV"
-    ></b-form-input>
-    <div class="col-md-12">
+    <h5 class="row-filter">Número do cartão</h5>
+    <b-form-input type="text" placeholder="0000-0000-0000-0000"></b-form-input>
+
+    <h5 class="row-filter">Validade</h5>
+    <b-form-input type="text" placeholder="00/00"></b-form-input>
+
+    <h5 class="row-filter">Codigo de segurança</h5>
+    <b-form-input type="text" placeholder="CVV"></b-form-input>
+
+    <div class="row-filter col-md-12">
       <b-button @click.native="checkout()" size="lg" variant="primary">
         Comprar
       </b-button>
-    </div>
-    <div class="col-md-12">
-      <b-button @click.native="checkout()" size="sm" variant="secondary">
+      <b-button @click.native="checkout()" size="lg" variant="primary">
         Pagar com dinheiro
       </b-button>
     </div>

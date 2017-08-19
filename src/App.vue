@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <header v-on:setUid="setUser">
-      <span>Vue.js PWA</span>
+    <header @click="goHome()" v-on:setUid="setUser">
+      <span id="appHeader">Nosso App Foda</span>
     </header>
     <main>
       <router-view></router-view>
@@ -20,6 +20,9 @@ export default {
   methods: {
     setUser (uid) {
       this.userId = uid
+    },
+    goHome () {
+      this.$router.push('/')
     }
   }
 }
@@ -28,6 +31,10 @@ export default {
 <style>
 body {
   margin: 0;
+}
+
+#appHeader {
+  cursor: pointer;
 }
 
 #app {
