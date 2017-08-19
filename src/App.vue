@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <header @click="goHome()" v-on:setUid="setUser">
-      <span id="appHeader">Nosso App Foda</span>
+    <header>
+      <span @click="goHome()" id="appHeader">Nosso App Foda
+        <div v-if="userId" @click="logout" class="logout-button float-right">Logout</div>
+      </span>
     </header>
     <main>
       <router-view></router-view>
@@ -14,16 +16,24 @@ export default {
   name: 'app',
   data () {
     return {
-      userId: ''
+      userId: localStorage.getItem('userId')
     }
   },
   methods: {
-    setUser (uid) {
-      this.userId = uid
-    },
     goHome () {
       this.$router.push('/')
+    },
+    logout () {
+      localStorage.removeItem('userId')
+      this.userId = ''
+      this.goHome()
     }
+  },
+  beforeMount () {
+    this.$on('setUid', (userId) => {
+      localStorage.setItem('userId', userId)
+      this.userId = localStorage.getItem('userId')
+    })
   }
 }
 </script>
@@ -71,5 +81,4 @@ header span {
 .row-filter {
   margin-top: 20px;
 }
-
 </style>
