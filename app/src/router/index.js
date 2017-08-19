@@ -25,7 +25,7 @@ export default new Router({
       component: Capture,
       props: true
     }, {
-      path: '/card',
+      path: '/card/:productId',
       name: 'Card',
       component: Card,
       props: true

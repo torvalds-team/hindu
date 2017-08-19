@@ -32,7 +32,7 @@ export default {
   data () {
     return {}
   },
-
+  props: ["productId"],
   methods: {
     checkout () {
       setTimeout(() => {
