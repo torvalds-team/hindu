@@ -4,6 +4,8 @@ import Hello from '@/components/Hello'
 import Events from '@/components/Events'
 import Capture from '@/components/Capture'
 import Product from '@/components/Product'
+import Card from '@/components/Card'
+import Success from '@/components/Success'
 
 Vue.use(Router)
 
@@ -26,6 +28,16 @@ export default new Router({
       path: '/product/:productId',
       name: 'Product',
       component: Product,
+      props: true
+    }, {
+      path: '/card/:productId',
+      name: 'Card',
+      component: Card,
+      props: true
+    }, {
+      path: '/success',
+      name: 'Success',
+      component: Success,
       props: true
     }
   ]
