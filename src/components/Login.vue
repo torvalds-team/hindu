@@ -46,12 +46,12 @@ export default {
     },
     authenticateWithFB () {
       this.provider.addScope('user_birthday')
-      firebase.auth().signInWithPopup(this.provider).then(function (result) {
+      firebase.auth().signInWithPopup(this.provider).then((result) => {
         var token = result.credential.accessToken
         var user = result.user
         console.log(token)
         // ...
-      }).catch(function (error) {
+      }).catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
