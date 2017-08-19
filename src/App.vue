@@ -50,4 +50,9 @@ header span {
   box-sizing: border-box;
   padding-top: 16px;
 }
+
+.row-filter {
+  margin-top: 20px;
+}
+
 </style>

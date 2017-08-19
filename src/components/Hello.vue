@@ -4,37 +4,43 @@
       <hr>
       <h1> Eventos </h1>
       <hr>
-      <b-list-group-item @click.native="toEvents('Open DLP')">
-        Open DLP
-      </b-list-group-item>
-
-      <b-list-group-item @click.native="toEvents('PHPRio')">
-        PHPRio
-      </b-list-group-item>
-
-      <b-list-group-item @click.native="toEvents('Frontin BH 2k17')">
-        Frontin BH 2k17
-      </b-list-group-item>
+      <b-list-group-item v-for="eventItem in eventsArray" :key="eventItem.key" @click.native="toEvents(eventItem)"> {{ eventItem.name }}</b-list-group-item>
     </b-list-group>
   </div>
 </template>
 
 <script>
+
+import firebase from '../firebase/firebase.js'
+import snapshotToArray from '../snapshotToArray/snapshotToArray.js'
+
 export default {
   name: 'hello',
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js PWA'
+      msg: 'Welcome to Your Vue.js PWA',
+      eventsRef: firebase.database().ref('events'),
+      eventsArray: []
     }
   },
 
+  mounted () {
+  },
+
   methods: {
-    toEvents (eventName) {
+    toEvents (eventItem) {
       setTimeout(() => {
-        this.$router.push('/events/' + eventName)
+        this.$router.push('/events/' + eventItem.key)
       }, 300)
-    }
+    },
+  },
+
+  beforeMount () {
+    this.eventsRef.once('value')
+      .then((snapshot) => {
+        this.eventsArray = snapshotToArray(snapshot)
+      })
   }
 }
 </script>

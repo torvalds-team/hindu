@@ -47,7 +47,5 @@ export default {
 </script>
 
 <style>
-.row-filter {
-  margin-top: 20px;
-}
+
 </style>
