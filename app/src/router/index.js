@@ -12,9 +12,10 @@ export default new Router({
       name: 'Hello',
       component: Hello
     }, {
-      path: '/events',
+      path: '/events/:eventName',
       name: 'Eventos',
-      component: Events
+      component: Events,
+      props: true
     }
   ]
 })
