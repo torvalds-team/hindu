@@ -17,7 +17,7 @@
       <b-button @click.native="checkout()" size="lg" variant="primary">
         Comprar
       </b-button>
-      <b-button @click.native="checkout()" size="lg" variant="primary">
+      <b-button @click.native="" size="lg" variant="primary">
         Pagar com dinheiro
       </b-button>
     </div>
@@ -30,6 +30,7 @@
 import App from './../App'
 import pagarme from 'pagarme'
 import shortid from 'shortid'
+import firebase from '../firebase/firebase.js'
 
 export default {
   name: 'card',
@@ -47,8 +48,18 @@ export default {
   props: ["productId"],
 
   methods: {
-    saveCustomer () {
-      var ref = firebase.database().ref('events/-KrtItSWwIXHQpQ6CRbB/products/'+this.product_id)
+    saveCustomer (name, card_id) {
+      return firebase.database().ref('customers/'+App.data().userId)
+        .once('value')
+        .then(response => {
+          if(response.val() === null) {
+            return firebase.database().ref('customers/'+App.data().userId).set({
+              name: name,
+              card_id: card_id,
+            })
+          }
+          return null
+        })
     },
     checkout () {
       let client
@@ -63,17 +74,25 @@ export default {
           })
         })
         .then(card => {
-          return client.transactions.create({
-            amount: 1000,
-            card_id: card.id,
-            reference_key: shortid.generate(),
-          })
+          return firebase.database().ref('events/-KrtItSWwIXHQpQ6CRbB/products/'+this.productId)
+            .once('value')
+            .then(product => {
+              return client.transactions.create({
+                amount: product.val().price,
+                card_id: card.id,
+                reference_key: shortid.generate(),
+              })
+            })
         })
         .then(transaction => {
-          if(transaction.status === 'paid') {
-            return this.$router.push('/success/'+transaction.reference_key)
-          }
-          alert('Ocorreu algum erro durante a transação, tente novamente')
+          return this.saveCustomer('', transaction.card.id)
+            .then(() => {
+              if(transaction.status === 'paid') {
+                return this.$router.push('/success/'+transaction.reference_key)
+              }
+
+              alert('Ocorreu algum erro durante a transação, tente novamente')
+            })
         })
         .catch(x => console.log(JSON.stringify(x)))
     }
@@ -81,7 +100,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
 </style>
