@@ -69,7 +69,7 @@ export default {
         .once('value')
         .then(response => {
           if (response.val() !== null) {
-            return pagarme.client.connect({ api_key: process.env.PAGARME_APIKEY })
+            return pagarme.client.connect({ api_key: "ak_test_GCYeHCJterPgIQtn8t4LSW06AtIDBa" })
               .then(tClient => {
                 tClient.cards.find({ id: response.val().card_id })
                   .then(card => {
@@ -104,7 +104,7 @@ export default {
     checkout () {
       this.canBuy = false
       let client
-      pagarme.client.connect({ api_key: process.env.PAGARME_APIKEY })
+      pagarme.client.connect({ api_key: "ak_test_GCYeHCJterPgIQtn8t4LSW06AtIDBa" })
         .then(tClient => {
           client = tClient
           if (this.cardId !== '') {
