@@ -10,7 +10,7 @@
     <h5 class="row-filter">Validade</h5>
     <b-form-input type="text" value="01/19" placeholder="00/00" v-model="card.card_expiration_date"></b-form-input>
 
-    <h5 class="row-filter">Codigo de segurança</h5>
+    <h5 class="row-filter">Código de segurança</h5>
     <b-form-input type="number" value="999" placeholder="CVV" v-model="card.card_cvv"></b-form-input>
 
     <div class="row-filter col-md-12">
@@ -81,6 +81,22 @@ export default {
                 amount: product.val().price,
                 card_id: card.id,
                 reference_key: shortid.generate(),
+                split_rules: [
+                  {
+                    liable: true,
+                    charge_processing_fee: true,
+                    percentage: 5,
+                    charge_remainder_fee: true,
+                    recipient_id: "re_cj5e2ofwg0089m26du3cxfzta"
+                  },
+                  {
+                    liable: true,
+                    charge_processing_fee: true,
+                    percentage: 95,
+                    charge_remainder_fee: true,
+                    recipient_id: "re_cj5ie1uag00nq3m6diohlav3e"
+                  }
+                ]
               })
             })
         })
@@ -93,6 +109,7 @@ export default {
 
               alert('Ocorreu algum erro durante a transação, tente novamente')
             })
+            .catch(x => console.log(JSON.stringify(x)))
         })
         .catch(x => console.log(JSON.stringify(x)))
     }

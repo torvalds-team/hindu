@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h5>Insira o código do produto</h5>
-    <b-form-input type="text" class="row-filter" v-model="product_id" placeholder="Código do produto"></b-form-input>
+    <h5>Insira o Código do Produto</h5>
+    <b-form-input type="text" class="row-filter col-10 offset-1" v-model="product_id" placeholder="Código do Produto"></b-form-input>
 
-    <b-button class="row-filter" @click.native="capture">
-      Capturar
+    <b-button  class="row-filter" @click.native="capture" variant="primary">
+      Comprar Agora!
     </b-button>
 
     <b-media vertical-align="center" class="row-filter">
@@ -12,21 +12,16 @@
     </b-media>
 
     <b-media vertical-align="center">
-      <img :src="qrCode">
+      <img :src="qrCode" v-if="false">
     </b-media>
 
-    <b-button @click.native="takePhoto">
-      Ler QR Code
-    </b-button>
-
     <div class="row">
-
-      <div class="select">
-        <label for="videoSource">Video source: </label>
-        <select id="videoSource"></select>
+      <video muted autoplay class="col-8 offset-2" height="100%"></video>
+      <div class="select row-filter col-8 offset-2">
+        <label for="videoSource">Escolha sua câmera!</label>
+        <!-- <select id="videoSource"></select> -->
+        <b-form-select id="videoSource" class="mb-3"></b-form-select>
       </div>
-
-      <video muted autoplay></video>
     </div>
   </div>
 </template>
@@ -58,8 +53,10 @@ export default {
             .child(this.product_id)
             .val()
 
-          if (!product)
-            throw new Error('Produto não existente')
+          if (!product) {
+            toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
+            throw new Error('Produto nÃ£o existente')
+          }
 
           this.productDetail()
         })
@@ -157,6 +154,10 @@ export default {
     function handleError (error) {
       console.log('Error: ', error);
     }
+
+    setInterval(() => {
+      this.takePhoto()
+    }, 1000)
   }
 }
 </script>
