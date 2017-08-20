@@ -17,18 +17,20 @@
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-vue": "^0.22.1",
+    "chalk": "^2.0.1",
     "firebase": "^4.3.0",
     "http-server": "^0.10.0",
     "mongoose": "^4.11.7",
+    "pagarme": "^3.1.1",
     "path": "^0.12.7",
     "qrcode-reader": "^1.0.2",
     "serve-static": "^1.12.4",
+    "shelljs": "^0.7.6",
+    "shortid": "^2.2.8",
     "vue": "^2.4.2",
     "vue-router": "^2.3.1",
     "vuefire": "^1.4.3",
-    "webcamjs": "^1.0.22",
-    "chalk": "^2.0.1",
-    "shelljs": "^0.7.6"
+    "webcamjs": "^1.0.22"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
