@@ -21,9 +21,6 @@
         <label for="videoSource">Escolha sua câmera!</label>
         <!-- <select id="videoSource"></select> -->
         <b-form-select id="videoSource" class="mb-3"></b-form-select>
-        <b-button @click.native="takePhoto" variant="primary">
-          Ler QR Code
-        </b-button>
       </div>
     </div>
   </div>
@@ -103,7 +100,6 @@ export default {
     qr.callback = (error, result) => {
       if (error) {
         console.log('Error during QR decode: ', error)
-        toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         return;
       } else {
         this.product_id = result.result
@@ -160,6 +156,10 @@ export default {
     function handleError (error) {
       console.log('Error: ', error);
     }
+
+    setInterval(() => {
+      this.takePhoto()
+    }, 1000)
   }
 }
 </script>
