@@ -96,12 +96,14 @@ export default {
   },
 
   mounted () {
+    let qrcodeLoop
 
     qr.callback = (error, result) => {
       if (error) {
         console.log('Error during QR decode: ', error)
         return;
       } else {
+        clearInterval(qrcodeLoop)
         this.product_id = result.result
         toastr.success('Sucesso!', '', { positionClass: "toast-bottom-center" })
         this.productDetail()
@@ -157,7 +159,7 @@ export default {
       console.log('Error: ', error);
     }
 
-    setInterval(() => {
+    qrcodeLoop = setInterval(() => {
       this.takePhoto()
     }, 1000)
   }
