@@ -24,10 +24,7 @@
       <b-button :disabled="canBuy == 0" @click.native="checkout()" size="lg" variant="primary">
         Comprar
       </b-button>
-      <b-button :disabled="canBuy == 0" size="lg" variant="primary">
-        Pagar com dinheiro
-      </b-button>
-      <img v-if="canBuy == 0" src="../assets/loading.gif"></img>
+      <img v-if="canBuy == 0" class="row-filter" src="../assets/loading.gif"></img>
     </div>
 
   </div>
@@ -39,6 +36,7 @@ import App from './../App'
 import pagarme from 'pagarme'
 import shortid from 'shortid'
 import firebase from '../firebase/firebase.js'
+import toastr from 'toastr'
 
 export default {
   name: 'card',
@@ -67,10 +65,10 @@ export default {
 
   methods: {
     getCard () {
-      return firebase.database().ref('customers/'+ App.data().userId)
-      .once('value')
+      return firebase.database().ref('customers/' + App.data().userId)
+        .once('value')
         .then(response => {
-          if(response.val() !== null) {
+          if (response.val() !== null) {
             return pagarme.client.connect({ api_key: process.env.PAGARME_APIKEY })
               .then(tClient => {
                 tClient.cards.find({ id: response.val().card_id })
@@ -80,6 +78,7 @@ export default {
                     this.firstDigits = card.first_digits
                     this.lastDigits = card.last_digits
                     this.holderName = card.holder_name
+                    toastr.success('Cartões atualizados!', '', { positionClass: "toast-bottom-center" })
                   })
               })
           }
@@ -97,6 +96,7 @@ export default {
               name: name,
               card_id: card_id,
             })
+            toastr.success('Cartão salvo!', '', { positionClass: "toast-bottom-center" })
           }
           return null
         })
@@ -107,7 +107,8 @@ export default {
       pagarme.client.connect({ api_key: process.env.PAGARME_APIKEY })
         .then(tClient => {
           client = tClient
-          if(this.cardId !== '') {
+          if (this.cardId !== '') {
+            toastr.success('Cartão conectado!', this.cardId, { positionClass: "toast-bottom-center" })
             return Promise.resolve({ id: this.cardId })
           }
 
@@ -155,16 +156,17 @@ export default {
               if (transaction.status === 'paid') {
                 return this.$router.push('/success/' + transaction.reference_key)
               }
-
-              alert('Ocorreu algum erro durante a transação, tente novamente')
+              toastr.error('Ocorreu algum erro durante a transação, tente novamente', '', { positionClass: "toast-bottom-center" })
             })
             .catch(x => {
               return this.$router.push('/card/' + this.productId)
               console.log(JSON.stringify(x))
+              toastr.error(JSON.stringify(x), '', { positionClass: "toast-bottom-center" })
             })
         })
         .catch(x => {
           return this.$router.push('/card/' + this.productId)
+          toastr.error(JSON.stringify(x), '', { positionClass: "toast-bottom-center" })
           console.log(JSON.stringify(x))
         })
     }
@@ -174,11 +176,11 @@ export default {
 
 <style>
 .cards {
-  border:1px solid black;
+  border: 1px solid black;
   margin-bottom: 10px;
 }
+
 .green {
   background-color: #8cffb2;
 }
-
 </style>
