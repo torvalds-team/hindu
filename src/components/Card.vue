@@ -1,16 +1,16 @@
 <template>
   <div class="container">
 
-    <h5 class="row-filter">Número do cartão</h5>
+    <h5 class="row-filter">NÃºmero do cartÃ£o</h5>
     <b-form-input type="number" value="" placeholder="0000-0000-0000-0000" v-model="card.card_number"></b-form-input>
 
-    <h5 class="row-filter">Nome impresso no cartão</h5>
+    <h5 class="row-filter">Nome impresso no cartÃ£o</h5>
     <b-form-input type="text" value="Linus Torvalds" placeholder="Linus Torvalds" v-model="card.card_holder_name"></b-form-input>
 
     <h5 class="row-filter">Validade</h5>
     <b-form-input type="text" value="01/19" placeholder="00/00" v-model="card.card_expiration_date"></b-form-input>
 
-    <h5 class="row-filter">Codigo de segurança</h5>
+    <h5 class="row-filter">Codigo de seguranÃ§a</h5>
     <b-form-input type="number" value="999" placeholder="CVV" v-model="card.card_cvv"></b-form-input>
 
     <div class="row-filter col-md-12">
@@ -52,7 +52,6 @@ export default {
     },
     checkout () {
       let client
-          console.log(process.env.PAGARME_APIKEY)
       pagarme.client.connect({ api_key: App.data().PAGARME_APIKEY })
         .then(tClient => {
           client = tClient
@@ -74,7 +73,7 @@ export default {
           if(transaction.status === 'paid') {
             return this.$router.push('/success/'+transaction.reference_key)
           }
-          alert('Ocorreu algum erro durante a transação, tente novamente')
+          alert('Ocorreu algum erro durante a transaÃ§Ã£o, tente novamente')
         })
         .catch(x => console.log(JSON.stringify(x)))
     }

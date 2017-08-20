@@ -58,7 +58,7 @@ export default {
 
           if (!product) {
             toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
-            throw new Error('Produto não existente')
+            throw new Error('Produto nÃ£o existente')
           }
 
           this.productDetail()
