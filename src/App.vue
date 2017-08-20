@@ -17,7 +17,7 @@
 import toastr from 'toastr'
 
 export default {
-  name: 'app',
+  name: 'Hindu',
   data () {
     return {
       userId: localStorage.getItem('userId')
