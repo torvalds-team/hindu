@@ -30,6 +30,7 @@
 import App from './../App'
 import pagarme from 'pagarme'
 import shortid from 'shortid'
+import toastr from 'toastr'
 
 export default {
   name: 'card',
@@ -48,7 +49,7 @@ export default {
 
   methods: {
     saveCustomer () {
-      var ref = firebase.database().ref('events/-KrtItSWwIXHQpQ6CRbB/products/'+this.product_id)
+      var ref = firebase.database().ref('events/-KrtItSWwIXHQpQ6CRbB/products/' + this.product_id)
     },
     checkout () {
       let client
@@ -67,29 +68,26 @@ export default {
             amount: 1000,
             card_id: card.id,
             reference_key: shortid.generate(),
-            split_rules: [
-              {
-                liable: true,
-                charge_processing_fee: true,
-                percentage: 5,
-                charge_remainder_fee: true,
-                recipient_id: "re_cj5e2ofwg0089m26du3cxfzta"
-              },
-              {
-                liable: true,
-                charge_processing_fee: true,
-                percentage: 95,
-                charge_remainder_fee: true,
-                recipient_id: "re_cj5ie1uag00nq3m6diohlav3e"
-              }
-            ]
+            split_rules: [{
+              liable: true,
+              charge_processing_fee: true,
+              percentage: 5,
+              charge_remainder_fee: true,
+              recipient_id: "re_cj5e2ofwg0089m26du3cxfzta"
+            }, {
+              liable: true,
+              charge_processing_fee: true,
+              percentage: 95,
+              charge_remainder_fee: true,
+              recipient_id: "re_cj5ie1uag00nq3m6diohlav3e"
+            }]
           })
         })
         .then(transaction => {
-          if(transaction.status === 'paid') {
-            return this.$router.push('/success/'+transaction.reference_key)
+          if (transaction.status === 'paid') {
+            return this.$router.push('/success/' + transaction.reference_key)
           }
-          alert('Ocorreu algum erro durante a transaÃ§Ã£o, tente novamente')
+          toastr.error('Ocorreu algum erro durante a transaÃ§Ã£o, tente novamente', '', { positionClass: "toast-bottom-center" })
         })
         .catch(x => console.log(JSON.stringify(x)))
     }

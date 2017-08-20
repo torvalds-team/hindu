@@ -40,10 +40,10 @@ export default {
         .then((obj) => {
           this.$parent.$emit('setUid', obj.uid)
           this.$router.push('/capture')
-          toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
+          toastr.success('Sucesso!', '', { positionClass: "toast-bottom-center" })
         })
-        .catch(function (error) {
-          toastr.error(error.message, error.code, { positionClass: "toast-bottom-center" })
+        .catch((error) => {
+          toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         });
     },
     authenticateWithFB () {
@@ -54,9 +54,9 @@ export default {
           var token = result.credential.accessToken
           this.$parent.$emit('setUid', result.user.uid)
           this.$router.push('/capture')
-          toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
+          toastr.success('Sucesso!', '', { positionClass: "toast-bottom-center" })
         }).catch((error) => {
-          toastr.error(error.message, error.code, { positionClass: "toast-bottom-center" })
+          toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         })
     }
   },

@@ -3,7 +3,7 @@
     <h5>Insira o Código do Produto</h5>
     <b-form-input type="text" class="row-filter col-10 offset-1" v-model="product_id" placeholder="Código do Produto"></b-form-input>
 
-    <b-button  class="row-filter" @click.native="capture" variant="primary">
+    <b-button class="row-filter" @click.native="capture" variant="primary">
       Comprar Agora!
     </b-button>
 
@@ -31,8 +31,9 @@
 
 <script>
 import firebase from '../firebase/firebase.js'
+import toastr from 'toastr'
 import QrCode from 'qrcode-reader'
-const qr = new QrCode();
+const qr = new QrCode()
 
 export default {
   name: 'capture',
@@ -63,8 +64,8 @@ export default {
 
           this.productDetail()
         })
-        .catch(function (error) {
-          alert(error.message)
+        .catch((error) => {
+          toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         });
     },
 
@@ -102,9 +103,11 @@ export default {
     qr.callback = (error, result) => {
       if (error) {
         console.log('Error during QR decode: ', error)
+        toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         return;
       } else {
         this.product_id = result.result
+        toastr.success('Sucesso!', '', { positionClass: "toast-bottom-center" })
         this.productDetail()
       }
     }
@@ -134,7 +137,7 @@ export default {
 
     function getStream () {
       if (window.stream) {
-        window.stream.getTracks().forEach(function (track) {
+        window.stream.getTracks().forEach((track) => {
           track.stop();
         });
       }

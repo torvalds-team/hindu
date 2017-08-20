@@ -21,6 +21,7 @@
 
 <script>
 import firebase from '../firebase/firebase.js'
+import toastr from 'toastr'
 
 export default {
   name: 'events',
@@ -59,8 +60,8 @@ export default {
         this.price = Math.floor(product.price / 100)
         this.image = product.image_url
       })
-      .catch(function(error) {
-        alert(error.message)
+      .catch((error) => {
+        toastr.error(error.message, '', { positionClass: "toast-bottom-center" })
         this.$router.push('/capture')
       });
   }

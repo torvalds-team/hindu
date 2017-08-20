@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import toastr from 'toastr'
+
 export default {
   name: 'app',
   data () {
@@ -29,6 +31,7 @@ export default {
       localStorage.removeItem('userId')
       this.userId = ''
       this.goHome()
+      toastr.success('Logout feito com sucesso!', '' , { positionClass: "toast-bottom-center" })
     }
   },
   beforeMount () {
