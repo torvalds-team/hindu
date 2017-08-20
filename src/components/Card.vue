@@ -108,7 +108,7 @@ export default {
         .then(tClient => {
           client = tClient
           if (this.cardId !== '') {
-            toastr.success('Cartão conectado!', this.cardId, { positionClass: "toast-bottom-center" })
+            toastr.success('Cartão conectado!', '', { positionClass: "toast-bottom-center" })
             return Promise.resolve({ id: this.cardId })
           }
 

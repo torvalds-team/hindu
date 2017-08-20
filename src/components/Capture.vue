@@ -90,6 +90,9 @@ export default {
 
       if (this.qrCode) {
         console.log(qr.decode(this.qrCode))
+        if (this.product_id) {
+          clearInterval(qrcodeLoop)
+        }
       }
     }
 
