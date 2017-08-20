@@ -26,51 +26,57 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+import App from './../App'
+import pagarme from 'pagarme'
+import shortid from 'shortid'
+
 export default {
   name: 'card',
 
   data () {
     return {
       card: {
-        card_number: '',
+        card_number: '4111111111111111',
         card_holder_name: 'Linus Torvalds',
-        card_expiration_date: '01/19',
+        card_expiration_date: '0119',
         card_cvv: '777',
       }
     }
   },
-
   props: ["productId"],
 
   methods: {
+    saveCustomer () {
+      var ref = firebase.database().ref('events/-KrtItSWwIXHQpQ6CRbB/products/'+this.product_id)
+    },
     checkout () {
-        axios.post('https://api.mundipagg.com/core/v1/customers/'+process.env.CUSTOMER_ID+'/cards', {
-            number: this.card.card_number,
-            holder_name: this.card.card_holder_name,
-            exp_date: this.card.card_expiration_date,
-            cvv: this.card.card_cvv
+      let client
+          console.log(process.env.PAGARME_APIKEY)
+      pagarme.client.connect({ api_key: App.data().PAGARME_APIKEY })
+        .then(tClient => {
+          client = tClient
+          return client.cards.create({
+            card_number: this.card.card_number,
+            card_holder_name: this.card.card_holder_name,
+            card_expiration_date: this.card.card_expiration_date,
+            card_cvv: this.card.card_cvv,
+          })
         })
-        .then(function (response) {
-            console.log(response);
+        .then(card => {
+          return client.transactions.create({
+            amount: 1000,
+            card_id: card.id,
+            reference_key: shortid.generate(),
+          })
         })
-        .catch(function (error) {
-            console.log(error.message);
-        });
-      // Implementar código que faz a transação
-
-      // Para acessar o valor dos campos use
-
-      // Os valores do campo estão disponiveis na variável this.card
-      // card: {
-      //   card_number: '',
-      //   card_holder_name: '',
-      //   card_expiration_date: '',
-      //   card_cvv: '',
-      // }
-
-      // Redirecionar após sucesso
-      // this.$router.push('/success')
+        .then(transaction => {
+          if(transaction.status === 'paid') {
+            return this.$router.push('/success/'+transaction.reference_key)
+          }
+          alert('Ocorreu algum erro durante a transação, tente novamente')
+        })
+        .catch(x => console.log(JSON.stringify(x)))
     }
   }
 }

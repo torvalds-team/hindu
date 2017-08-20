@@ -93,7 +93,6 @@ export default {
       if (this.qrCode) {
         console.log(qr.decode(this.qrCode))
       }
-      // document.body.appendChild(img);
     }
 
   },
@@ -128,7 +127,7 @@ export default {
             (videoSelect.length + 1);
           videoSelect.appendChild(option);
         } else {
-          // console.log('Found ome other kind of source/device: ', deviceInfo);
+          console.log('Found ome other kind of source/device: ', deviceInfo);
         }
       }
     }

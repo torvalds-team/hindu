@@ -31,7 +31,7 @@ const router = new Router({
       component: Card,
       props: true
     }, {
-      path: '/success',
+      path: '/success/:transactionReference',
       name: 'Success',
       component: Success,
       props: true
