@@ -67,6 +67,22 @@ export default {
             amount: 1000,
             card_id: card.id,
             reference_key: shortid.generate(),
+            split_rules: [
+              {
+                liable: true,
+                charge_processing_fee: true,
+                percentage: 5,
+                charge_remainder_fee: true,
+                recipient_id: "re_cj5e2ofwg0089m26du3cxfzta"
+              },
+              {
+                liable: true,
+                charge_processing_fee: true,
+                percentage: 95,
+                charge_remainder_fee: true,
+                recipient_id: "re_cj5ie1uag00nq3m6diohlav3e"
+              }
+            ]
           })
         })
         .then(transaction => {
