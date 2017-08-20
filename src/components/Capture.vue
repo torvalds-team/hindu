@@ -38,7 +38,8 @@ export default {
   data () {
     return {
       product_id: '',
-      qrCode: null
+      qrCode: null,
+      qrcodeLoop: ''
     }
   },
 
@@ -91,7 +92,7 @@ export default {
       if (this.qrCode) {
         console.log(qr.decode(this.qrCode))
         if (this.product_id) {
-          clearInterval(qrcodeLoop)
+          clearInterval(this.qrcodeLoop)
         }
       }
     }
@@ -99,14 +100,13 @@ export default {
   },
 
   mounted () {
-    let qrcodeLoop
 
     qr.callback = (error, result) => {
       if (error) {
         console.log('Error during QR decode: ', error)
         return;
       } else {
-        clearInterval(qrcodeLoop)
+        clearInterval(this.qrcodeLoop)
         this.product_id = result.result
         toastr.success('Sucesso!', '', { positionClass: "toast-bottom-center" })
         this.productDetail()
@@ -162,7 +162,7 @@ export default {
       console.log('Error: ', error);
     }
 
-    qrcodeLoop = setInterval(() => {
+    this.qrcodeLoop = setInterval(() => {
       this.takePhoto()
     }, 1000)
   }
