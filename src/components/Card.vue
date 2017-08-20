@@ -52,8 +52,7 @@ export default {
     },
     checkout () {
       let client
-          console.log(process.env.PAGARME_APIKEY)
-      pagarme.client.connect({ api_key: App.data().PAGARME_APIKEY })
+      pagarme.client.connect({ api_key: process.env.PAGARME_APIKEY })
         .then(tClient => {
           client = tClient
           return client.cards.create({
