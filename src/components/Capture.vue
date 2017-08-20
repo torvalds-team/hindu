@@ -60,7 +60,7 @@ export default {
 
           this.productDetail()
         })
-        .catch(function (error) {
+        .catch((error) => {
           alert(error.message)
         });
     },
@@ -95,12 +95,14 @@ export default {
   },
 
   mounted () {
+    let qrcodeLoop
 
     qr.callback = (error, result) => {
       if (error) {
         console.log('Error during QR decode: ', error)
         return;
       } else {
+        clearInterval(qrcodeLoop)
         this.product_id = result.result
         this.productDetail()
       }
@@ -155,7 +157,7 @@ export default {
       console.log('Error: ', error);
     }
 
-    setInterval(() => {
+    qrcodeLoop = setInterval(() => {
       this.takePhoto()
     }, 1000)
   }

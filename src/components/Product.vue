@@ -59,7 +59,7 @@ export default {
         this.price = Math.floor(product.price / 100)
         this.image = product.image_url
       })
-      .catch(function(error) {
+      .catch((error) => {
         alert(error.message)
         this.$router.push('/capture')
       });
