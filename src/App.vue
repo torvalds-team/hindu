@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <span @click="goHome()" id="appHeader">Nosso App Foda
-        <div v-if="userId" @click="logout" class="logout-button float-right">Logout</div>
+      <span @click="goHome()" id="appHeader"> CompraGo!
+        <b-button v-if="userId" @click.native="logout" size="sm" variant="outline-danger sm" class="float-right">
+          Logout
+        </b-button>
       </span>
     </header>
     <main>

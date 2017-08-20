@@ -20,6 +20,7 @@
 
 <script>
 import firebase from '../firebase/firebase.js'
+import toastr from 'toastr'
 
 export default {
   name: 'login',
@@ -39,26 +40,24 @@ export default {
         .then((obj) => {
           this.$parent.$emit('setUid', obj.uid)
           this.$router.push('/capture')
+          toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
         })
         .catch(function (error) {
-          alert(error.message)
+          toastr.error(error.message, error.code, { positionClass: "toast-bottom-center" })
         });
     },
     authenticateWithFB () {
       this.provider.addScope('user_birthday')
-      firebase.auth().signInWithPopup(this.provider).then((result) => {
-        var token = result.credential.accessToken
-        this.$parent.$emit('setUid', result.user.uid)
-        this.$router.push('/capture')
-      }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        this.email = error.email
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential
-      })
+      firebase.auth()
+        .signInWithPopup(this.provider)
+        .then((result) => {
+          var token = result.credential.accessToken
+          this.$parent.$emit('setUid', result.user.uid)
+          this.$router.push('/capture')
+          toastr.success('Sucesso!', { positionClass: "toast-bottom-center" })
+        }).catch((error) => {
+          toastr.error(error.message, error.code, { positionClass: "toast-bottom-center" })
+        })
     }
   },
 
