@@ -47,3 +47,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 | url  | https://hindu.herokuapp.com/#/ |
 | usr  | hackathon@mundipagg.com        |
 | pwd  | hackathon                      |
+
+Test with product 0 or 1.
+
+If you with test qrcode pay, generate qrcode to char 0 or 1 and read this in app.
