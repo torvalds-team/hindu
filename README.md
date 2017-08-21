@@ -1,12 +1,17 @@
-# app
+# Hindu
+A fast way to buy products in loco
 
-> A Vue.js project
-
-# Purpose
+## Purpose
 * Open app (or site)
 * Select location (a store, restaurant or another place selling products)
 * Select product for sale in location or read qrcode of product
 * Pay with one touch (or click)
+
+## Techincal info
+* PWA maked with Vue
+* API in Google Firebase
+* Payment with pagar.me
+* application hosted in Heroku by automatic deploy with push in master branch
 
 ## Build Setup
 
@@ -35,7 +40,7 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## Demo app
+# Demo app
 
 | data | value                          |
 | ---- |--------------------------------|
