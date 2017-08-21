@@ -2,6 +2,12 @@
 
 > A Vue.js project
 
+# Purpose
+* Open app (or site)
+* Select location (a store, restaurant or another place selling products)
+* Select product for sale in location or read qrcode of product
+* Pay with one touch (or click)
+
 ## Build Setup
 
 ``` bash
@@ -28,3 +34,11 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Demo app
+
+| data | value                          |
+| ---- |--------------------------------|
+| url  | https://hindu.herokuapp.com/#/ |
+| usr  | hackathon@mundipagg.com        |
+| pwd  | hackathon                      |
